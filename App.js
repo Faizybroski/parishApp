@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { AuthProvider } from "./src/contexts/AuthContext";
+import { ScrollView, Text, View, TouchableOpacity, TextInput } from "react-native";
+import { TailwindProvider } from 'tailwindcss-react-native';
+import PendingApproval from "./src/pages/waitingApprovalPage";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { OnboardingCarousel } from './src/components/OnboardingCarousal/Onboardingcarousel'; // Adjust the import path as necessary
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TailwindProvider platform="android">
+            <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Onboarding">
+            <Stack.Screen
+              name="Onboarding"
+              component={OnboardingCarousel}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="WaitingApproval"
+              component={PendingApproval}
+                options={{
+    headerLeft: () => null,
+    gestureEnabled: false, // disables swipe back on iOS
+  }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AuthProvider> 
+    </TailwindProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
