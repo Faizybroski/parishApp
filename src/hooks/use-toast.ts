@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, Text, Animated, StyleSheet, TouchableOpacity } from "react-native";
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 5000; // 5 seconds
@@ -68,11 +68,11 @@ export const ToastContainer = () => {
   const { toasts, dismiss } = useToast();
 
   return (
-    <View style={container} pointerEvents="box-none">
+    <ScrollView style={container} pointerEvents="box-none">
       {toasts.map((t) => (
         <ToastItem key={t.id} toast={t} onDismiss={() => dismiss(t.id)} />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -84,12 +84,12 @@ const ToastItem = ({ toast, onDismiss }: { toast: ToasterToast; onDismiss: () =>
   }, []);
 
   return (
-    <Animated.View style={[styles.toast, { opacity }]}>
+    <Animated.ScrollView style={[styles.toast, { opacity }]}>
       <TouchableOpacity onPress={onDismiss}>
         {toast.title && <Text style={styles.title}>{toast.title}</Text>}
         {toast.description && <Text style={styles.description}>{toast.description}</Text>}
       </TouchableOpacity>
-    </Animated.View>
+    </Animated.ScrollView>
   );
 };
 

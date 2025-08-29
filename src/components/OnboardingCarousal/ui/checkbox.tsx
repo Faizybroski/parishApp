@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View, StyleSheet, GestureResponderEvent } from "react-native";
+import { TouchableOpacity, ScrollView, StyleSheet, GestureResponderEvent } from "react-native";
 // import { Check } from "lucide-react-native"; // make sure to install lucide-react-native
 import { Feather } from '@expo/vector-icons';
 
@@ -30,7 +30,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       disabled={disabled}
       style={[styles.container, style]}
     >
-      <View
+      <ScrollView
         style={[
           styles.box,
           { width: size, height: size },
@@ -41,7 +41,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         {checked && <Feather name="check" size={16} color="#ffffff" />
         // <Check width={size * 0.8} height={size * 0.8} color="#ffffff" />
       }
-      </View>
+      </ScrollView>
     </TouchableOpacity>
   );
 };

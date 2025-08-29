@@ -1,12 +1,12 @@
-import { View, Image } from 'react-native';
+import { ScrollView, Image } from 'react-native';
 import { useTailwind } from 'tailwindcss-react-native';
 
 const ParishLogo = () => {
   const tailwind = useTailwind();
   return (
-    <View>
+    <ScrollView>
         <Image style={tailwind('max-w-8 mr-2')} source={require('../../../public/Parishus logo.png')} alt="Parish Logo" />
-    </View>
+    </ScrollView>
   )
 }
 

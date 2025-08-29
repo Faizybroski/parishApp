@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  View,
+  ScrollView,
   Text,
   TouchableOpacity,
   Animated,
@@ -92,11 +92,11 @@ export const ToastContainer = () => {
   const { toasts, dismiss } = useToast();
 
   return (
-    <View pointerEvents="box-none" style={styles.container}>
+    <ScrollView pointerEvents="box-none" style={styles.container}>
       {toasts.map((t) => (
         <ToastItem key={t.id} toast={t} onDismiss={() => dismiss(t.id)} />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -118,17 +118,17 @@ const ToastItem = ({
     toast.variant === "destructive" ? "#F87171" : "#333"; // red or dark
 
   return (
-    <Animated.View style={[styles.toast, { opacity, backgroundColor }]}>
-      <View style={{ flex: 1 }}>
+    <Animated.ScrollView style={[styles.toast, { opacity, backgroundColor }]}>
+      <ScrollView style={{ flex: 1 }}>
         {toast.title && <Text style={styles.title}>{toast.title}</Text>}
         {toast.description && (
           <Text style={styles.description}>{toast.description}</Text>
         )}
-      </View>
+      </ScrollView>
       <TouchableOpacity onPress={onDismiss} style={styles.closeButton}>
         <Text style={{ color: "#fff", fontWeight: "bold" }}>X</Text>
       </TouchableOpacity>
-    </Animated.View>
+    </Animated.ScrollView>
   );
 };
 

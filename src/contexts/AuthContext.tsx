@@ -8,7 +8,7 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signUp: (email: string, password: string, metadata?: any) => Promise<{ error: any }>;
-  signIn: (email: string, password: string, expectedRole: "admin" | "user") => Promise<{ error: any }>;
+  signIn: (email: string, password: string) => Promise<{ error: any }>;
   signInWithGoogle: () => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return { error };
   };
 
-  const signIn = async (email: string, password: string, expectedRole: "admin" | "user") => {
+  const signIn = async (email: string, password: string,) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error || !data.user) return { error: error ?? { message: "Invalid login attempt" } };
@@ -67,10 +67,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       .single();
 
     if (profileError) return { error: profileError };
-    if (profile?.role !== expectedRole) {
-      await supabase.auth.signOut();
-      return { error: { message: `User is not ${expectedRole}` } };
-    }
 
     setUser(data.user);
     setSession(data.session ?? null);

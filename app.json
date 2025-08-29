@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "jsEngine": "hermes",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -20,14 +21,23 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.project"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-web-browser",
-      "expo-router"
+      "expo-router",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "react-native",
+          "organization": "tsn-4e"
+        }
+      ]
     ]
   }
 }

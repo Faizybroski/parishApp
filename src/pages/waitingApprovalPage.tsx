@@ -1,8 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useAuth } from '../contexts/AuthContext';
+import { useProfile } from '../hooks/useProfile';
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const PendingApproval = () => {
+const PendingApproval = ({ navigation }) => {
+    const { user, loading: authLoading } = useAuth();
+    const { profile, loading: profileLoading } = useProfile();
+      const navigate = useNavigation();
+      const route = useRoute();
+      const currentPath = route.name; 
+  useEffect(() => {
+    if (profile && profile.approval_status === 'approved') return navigate.navigate('dashboard' as never);
+  })
   return (
     <View style={styles.container}>
       <MaterialCommunityIcons
@@ -21,8 +32,7 @@ const PendingApproval = () => {
       <Text style={styles.heading}>Approval Pending</Text>
       <Text style={styles.subheading}>Thanks for signing up!</Text>
       <Text style={styles.body}>
-        Our team is reviewing your account details. You’ll get an email once
-        you’ve been approved.
+        Our team is reviewing your account details. You’ll get an email once you’ve been approved.
       </Text>
     </View>
   );

@@ -489,6 +489,7 @@ export type Database = {
           role: Database["public"]["Enums"]["user_role"]
           updated_at: string
           user_id: string
+          approval_status: string | null
         }
         Insert: {
           allow_crossed_paths_tracking?: boolean | null
@@ -709,7 +710,7 @@ export type Database = {
         ]
       }
     }
-    Views: {
+    ScrollViews: {
       [_ in never]: never
     }
     Functions: {
@@ -763,27 +764,27 @@ type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["ScrollViews"])
     | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["ScrollViews"])
     : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
   ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["ScrollViews"])[TableName] extends {
       Row: infer R
     }
     ? R
     : never
   : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
+        DefaultSchema["ScrollViews"])
     ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        DefaultSchema["ScrollViews"])[DefaultSchemaTableNameOrOptions] extends {
         Row: infer R
       }
       ? R

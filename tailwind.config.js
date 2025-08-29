@@ -5,7 +5,13 @@ module.exports = {
     "./<custom directory>/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#007AFF",
+        "primary-foreground": "#FFFFFF",
+        "muted-foreground": "#6B7280",
+      },
+    },
   },
   plugins: [],
 }

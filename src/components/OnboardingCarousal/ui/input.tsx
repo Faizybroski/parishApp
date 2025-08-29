@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, StyleSheet, TextInputProps, View, ViewStyle } from "react-native";
+import { TextInput, StyleSheet, TextInputProps, ScrollView, ViewStyle } from "react-native";
 
 interface InputProps extends TextInputProps {
   style?: ViewStyle;

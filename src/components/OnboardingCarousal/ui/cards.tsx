@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ViewStyle, TextStyle } from "react-native";
+import { ScrollView, Text, StyleSheet, ViewStyle, TextStyle } from "react-native";
 
 interface CardProps {
   style?: ViewStyle;
@@ -13,12 +13,12 @@ interface CardTextProps {
 
 // Main Card container
 export const Card: React.FC<CardProps> = ({ style, children }) => {
-  return <View style={[styles.card, style]}>{children}</View>;
+  return <ScrollView style={[styles.card, style]}>{children}</ScrollView>;
 };
 
 // Card Header
 export const CardHeader: React.FC<CardProps> = ({ style, children }) => {
-  return <View style={[styles.header, style]}>{children}</View>;
+  return <ScrollView style={[styles.header, style]}>{children}</ScrollView>;
 };
 
 // Card Title
@@ -33,12 +33,12 @@ export const CardDescription: React.FC<CardTextProps> = ({ style, children }) =>
 
 // Card Content
 export const CardContent: React.FC<CardProps> = ({ style, children }) => {
-  return <View style={[styles.content, style]}>{children}</View>;
+  return <ScrollView style={[styles.content, style]}>{children}</ScrollView>;
 };
 
 // Card Footer
 export const CardFooter: React.FC<CardProps> = ({ style, children }) => {
-  return <View style={[styles.footer, style]}>{children}</View>;
+  return <ScrollView style={[styles.footer, style]}>{children}</ScrollView>;
 };
 
 const styles = StyleSheet.create({

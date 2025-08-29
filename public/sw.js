@@ -24,7 +24,7 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         action: 'explore',
-        title: 'View',
+        title: 'ScrollView',
         icon: '/favicon.ico'
       },
       {
